@@ -1,9 +1,9 @@
 package handler
 
 import (
-	"github.com/golanguzb71/microservice-project-template/config"
-	"github.com/golanguzb71/microservice-project-template/pkg/logger"
-	"github.com/golanguzb71/microservice-project-template/server/grpc"
+	"github.com/golanguzb71/livesphere-auth-service/config"
+	"github.com/golanguzb71/livesphere-auth-service/pkg/logger"
+	"github.com/golanguzb71/livesphere-auth-service/server/grpc"
 )
 
 type Optoins struct {

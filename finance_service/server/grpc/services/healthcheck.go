@@ -2,11 +2,12 @@ package services
 
 import (
 	"context"
-	"github.com/golanguzb71/microservice-project-template/config"
-	pb "github.com/golanguzb71/microservice-project-template/genproto/template_service"
-	"github.com/golanguzb71/microservice-project-template/pkg/logger"
-	"github.com/golanguzb71/microservice-project-template/server/grpc/client"
-	"github.com/golanguzb71/microservice-project-template/storage"
+
+	"github.com/golanguzb71/livesphere-finance-service/config"
+	pb "github.com/golanguzb71/livesphere-finance-service/genproto/template_service"
+	"github.com/golanguzb71/livesphere-finance-service/pkg/logger"
+	"github.com/golanguzb71/livesphere-finance-service/server/grpc/client"
+	"github.com/golanguzb71/livesphere-finance-service/storage"
 )
 
 type HealthCheckService struct {

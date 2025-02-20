@@ -1,6 +1,6 @@
 package client
 
-import "github.com/golanguzb71/microservice-project-template/config"
+import "github.com/golanguzb71/livesphere-finance-service/config"
 
 type ServiceManager interface {
 }

@@ -2,7 +2,7 @@ package handler
 
 import (
 	"github.com/gin-gonic/gin"
-	pb "github.com/golanguzb71/microservice-project-template/genproto/template_service"
+	pb "github.com/golanguzb71/livesphere-auth-service/genproto/template_service"
 )
 
 func (h *Handler) HealthCheck(ctx *gin.Context) {

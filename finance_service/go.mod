@@ -1,4 +1,4 @@
-module github.com/golanguzb71/microservice-project-template
+module github.com/golanguzb71/livesphere-finance-service
 
 go 1.21
 

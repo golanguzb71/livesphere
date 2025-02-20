@@ -2,8 +2,9 @@ package etc
 
 import (
 	"fmt"
-	"github.com/golanguzb71/microservice-project-template/config"
 	"strings"
+
+	"github.com/golanguzb71/livesphere-api-gateway/config"
 )
 
 var cfg = config.Load()

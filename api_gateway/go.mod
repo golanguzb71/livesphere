@@ -1,4 +1,4 @@
-module github.com/golanguzb71/microservice-project-template
+module github.com/golanguzb71/livesphere-api-gateway
 
 go 1.21
 

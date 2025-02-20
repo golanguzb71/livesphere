@@ -1,11 +1,11 @@
 package storage
 
 import (
-	"github.com/golanguzb71/microservice-project-template/config"
-	"github.com/golanguzb71/microservice-project-template/pkg/db"
-	"github.com/golanguzb71/microservice-project-template/pkg/logger"
-	"github.com/golanguzb71/microservice-project-template/storage/postgres"
-	"github.com/golanguzb71/microservice-project-template/storage/repo"
+	"github.com/golanguzb71/livesphere-core-service/config"
+	"github.com/golanguzb71/livesphere-core-service/pkg/db"
+	"github.com/golanguzb71/livesphere-core-service/pkg/logger"
+	"github.com/golanguzb71/livesphere-core-service/storage/postgres"
+	"github.com/golanguzb71/livesphere-core-service/storage/repo"
 )
 
 type StorageI interface {

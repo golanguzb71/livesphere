@@ -2,14 +2,15 @@ package grpc
 
 import (
 	"fmt"
-	"github.com/golanguzb71/microservice-project-template/config"
-	pb "github.com/golanguzb71/microservice-project-template/genproto/template_service"
-	"github.com/golanguzb71/microservice-project-template/pkg/db"
-	"github.com/golanguzb71/microservice-project-template/pkg/logger"
-	"github.com/golanguzb71/microservice-project-template/server/grpc/client"
-	"github.com/golanguzb71/microservice-project-template/server/grpc/services"
-	"github.com/golanguzb71/microservice-project-template/storage"
 	"net"
+
+	"github.com/golanguzb71/livesphere-auth-service/config"
+	pb "github.com/golanguzb71/livesphere-auth-service/genproto/template_service"
+	"github.com/golanguzb71/livesphere-auth-service/pkg/db"
+	"github.com/golanguzb71/livesphere-auth-service/pkg/logger"
+	"github.com/golanguzb71/livesphere-auth-service/server/grpc/client"
+	"github.com/golanguzb71/livesphere-auth-service/server/grpc/services"
+	"github.com/golanguzb71/livesphere-auth-service/storage"
 
 	_ "github.com/lib/pq"
 

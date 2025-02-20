@@ -2,11 +2,12 @@ package postgres
 
 import (
 	"context"
-	"github.com/golanguzb71/microservice-project-template/config"
-	pb "github.com/golanguzb71/microservice-project-template/genproto/template_service"
-	"github.com/golanguzb71/microservice-project-template/pkg/db"
-	"github.com/golanguzb71/microservice-project-template/pkg/logger"
-	"github.com/golanguzb71/microservice-project-template/storage/repo"
+
+	"github.com/golanguzb71/livesphere-core-service/config"
+	pb "github.com/golanguzb71/livesphere-core-service/genproto/template_service"
+	"github.com/golanguzb71/livesphere-core-service/pkg/db"
+	"github.com/golanguzb71/livesphere-core-service/pkg/logger"
+	"github.com/golanguzb71/livesphere-core-service/storage/repo"
 
 	"time"
 

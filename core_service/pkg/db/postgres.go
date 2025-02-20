@@ -4,8 +4,9 @@ package db
 import (
 	"context"
 	"fmt"
-	"github.com/golanguzb71/microservice-project-template/config"
 	"time"
+
+	"github.com/golanguzb71/livesphere-core-service/config"
 
 	"github.com/Masterminds/squirrel"
 	"github.com/jackc/pgx/v5/pgxpool"

@@ -3,9 +3,10 @@ package postgres
 import (
 	"database/sql"
 	"fmt"
-	pb "github.com/golanguzb71/microservice-project-template/genproto/template_service"
-	"github.com/golanguzb71/microservice-project-template/pkg/logger"
 	"strings"
+
+	pb "github.com/golanguzb71/livesphere-api-gateway/genproto/template_service"
+	"github.com/golanguzb71/livesphere-api-gateway/pkg/logger"
 
 	"github.com/Masterminds/squirrel"
 	"github.com/lib/pq"
