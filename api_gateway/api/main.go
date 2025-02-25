@@ -3,14 +3,14 @@ package api
 import (
 	"github.com/gin-gonic/gin"
 	rediscache "github.com/golanguzb70/redis-cache"
-	v1 "gitlab.udevs.io/eld/eld_go_api_gateway/api/handlers/v1"
-	"gitlab.udevs.io/eld/eld_go_api_gateway/api/middleware"
-	"gitlab.udevs.io/eld/eld_go_api_gateway/config"
-	"gitlab.udevs.io/eld/eld_go_api_gateway/event"
-	"gitlab.udevs.io/eld/eld_go_api_gateway/pkg/logger"
-	"gitlab.udevs.io/eld/eld_go_api_gateway/services"
+	v1 "github.com/golanguzb71/livesphere-api-gateway/api/handlers/v1"
+	"github.com/golanguzb71/livesphere-api-gateway/api/middleware"
+	"github.com/golanguzb71/livesphere-api-gateway/config"
+	"github.com/golanguzb71/livesphere-api-gateway/event"
+	"github.com/golanguzb71/livesphere-api-gateway/pkg/logger"
+	"github.com/golanguzb71/livesphere-api-gateway/services"
 
-	_ "gitlab.udevs.io/eld/eld_go_api_gateway/api/docs"
+	_ "github.com/golanguzb71/livesphere-api-gateway/api/docs"
 
 	swaggerFiles "github.com/swaggo/files"
 	ginSwagger "github.com/swaggo/gin-swagger"

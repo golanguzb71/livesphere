@@ -1,4 +1,4 @@
-module gitlab.udevs.io/eld/eld_go_api_gateway
+module github.com/golanguzb71/livesphere-api-gateway
 
 go 1.22
 

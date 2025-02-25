@@ -4,7 +4,7 @@ import (
 	"context"
 	"time"
 
-	"gitlab.udevs.io/eld/eld_go_api_gateway/config"
+	"github.com/golanguzb71/livesphere-api-gateway/config"
 	"google.golang.org/grpc/metadata"
 )
 

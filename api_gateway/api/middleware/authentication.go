@@ -1,13 +1,14 @@
 package middleware
 
 import (
+	v1 "github.com/golanguzb71/livesphere-api-gateway/api/handlers/v1"
 	"strings"
 
 	"github.com/gin-gonic/gin"
 
-	"gitlab.udevs.io/eld/eld_go_api_gateway/api/models"
-	"gitlab.udevs.io/eld/eld_go_api_gateway/config"
-	"gitlab.udevs.io/eld/eld_go_api_gateway/pkg/jwt"
+	"github.com/golanguzb71/livesphere-api-gateway/api/models"
+	"github.com/golanguzb71/livesphere-api-gateway/config"
+	"github.com/golanguzb71/livesphere-api-gateway/pkg/jwt"
 )
 
 func Authentication(handlerOptions *v1.HandlerV1Options, cfg *config.Config) func(ctx *gin.Context) {
@@ -27,7 +28,7 @@ func Authentication(handlerOptions *v1.HandlerV1Options, cfg *config.Config) fun
 			tokenInfo, err := jwt.JWTExtract(token, cfg.JWTSigningKey)
 			if err != nil {
 				ctx.JSON(401, models.Response{
-					Code:    config.ErrorCodeUnauthorized,
+					Status:  config.ErrorCodeUnauthorized,
 					Message: err.Error(),
 				})
 				ctx.Abort()

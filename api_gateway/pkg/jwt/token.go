@@ -6,7 +6,7 @@ import (
 
 	"github.com/dgrijalva/jwt-go"
 	"github.com/spf13/cast"
-	"gitlab.udevs.io/eld/eld_go_api_gateway/config"
+	"github.com/golanguzb71/livesphere-api-gateway/config"
 )
 
 func JWTGenerate(data map[string]string, expireSeconds int64, signKey string) (string, error) {

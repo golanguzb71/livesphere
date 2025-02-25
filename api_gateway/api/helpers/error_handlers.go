@@ -6,9 +6,9 @@ import (
 	"strings"
 
 	"github.com/gin-gonic/gin"
-	"gitlab.udevs.io/eld/eld_go_api_gateway/api/models"
-	"gitlab.udevs.io/eld/eld_go_api_gateway/config"
-	"gitlab.udevs.io/eld/eld_go_api_gateway/pkg/logger"
+	"github.com/golanguzb71/livesphere-api-gateway/api/models"
+	"github.com/golanguzb71/livesphere-api-gateway/config"
+	"github.com/golanguzb71/livesphere-api-gateway/pkg/logger"
 	"google.golang.org/grpc/codes"
 	"google.golang.org/grpc/status"
 )
@@ -17,7 +17,7 @@ func HandleGrpcErrWithMessage(c *gin.Context, l logger.Logger, err error, messag
 	st, ok := status.FromError(err)
 	if !ok || st.Code() == codes.Internal {
 		c.JSON(http.StatusInternalServerError, models.Response{
-			Code:    config.ErrorCodeInternal,
+			Status:  config.ErrorCodeInternal,
 			Message: st.Message(),
 		})
 		l.Error(message, logger.Error(err))
@@ -26,21 +26,21 @@ func HandleGrpcErrWithMessage(c *gin.Context, l logger.Logger, err error, messag
 
 	if st.Code() == codes.NotFound {
 		c.JSON(http.StatusNotFound, models.Response{
-			Code:    config.ErrorCodeNotFound,
+			Status:  config.ErrorCodeNotFound,
 			Message: st.Message(),
 		})
 		l.Error(message+", not found", logger.Error(err))
 		return true
 	} else if st.Code() == codes.Unavailable {
 		c.JSON(http.StatusInternalServerError, models.Response{
-			Code:    config.ErrorCodeInternal,
+			Status:  config.ErrorCodeInternal,
 			Message: "Internal Server Error",
 		})
 		l.Error(message+", service unavailable", logger.Error(err))
 		return true
 	} else if st.Code() == codes.AlreadyExists {
 		c.JSON(http.StatusBadRequest, models.Response{
-			Code:    config.ErrorCodeAlreadyExists,
+			Status:  config.ErrorCodeAlreadyExists,
 			Message: fmt.Sprintf("%s is alredy exists", strings.ToTitle(strings.ReplaceAll(st.Message(), "_key", ""))),
 		})
 
@@ -49,14 +49,14 @@ func HandleGrpcErrWithMessage(c *gin.Context, l logger.Logger, err error, messag
 	} else if st.Code() == codes.InvalidArgument {
 		if st.Message() == config.ErrorCodeSessionLimit {
 			c.JSON(http.StatusBadRequest, models.Response{
-				Code:    config.ErrorCodeSessionLimit,
+				Status:  config.ErrorCodeSessionLimit,
 				Message: st.Message(),
 			})
 			l.Error(message+", session limit", logger.Error(err))
 			return true
 		} else if st.Message() == config.ErrorCodeInvalidCode {
 			c.JSON(http.StatusBadRequest, models.Response{
-				Code:    config.ErrorCodeInvalidCode,
+				Status:  config.ErrorCodeInvalidCode,
 				Message: st.Message(),
 			})
 			l.Error(message+", Invalid OTP code", logger.Error(err))
@@ -64,21 +64,21 @@ func HandleGrpcErrWithMessage(c *gin.Context, l logger.Logger, err error, messag
 		}
 
 		c.JSON(http.StatusBadRequest, models.Response{
-			Code:    config.ErrorBadRequest,
+			Status:  config.ErrorBadRequest,
 			Message: st.Message(),
 		})
 		l.Error(message+", invalid field", logger.Error(err))
 		return true
 	} else if st.Code() == codes.Code(20) {
 		c.JSON(http.StatusBadRequest, models.Response{
-			Code:    config.ErrorBadRequest,
+			Status:  config.ErrorBadRequest,
 			Message: st.Message(),
 		})
 		l.Error(message+", invalid field", logger.Error(err))
 		return true
 	} else if st.Err() != nil {
 		c.JSON(http.StatusBadRequest, models.Response{
-			Code:    config.ErrorBadRequest,
+			Status:  config.ErrorBadRequest,
 			Message: st.Message(),
 		})
 		l.Error(message+", invalid field", logger.Error(err))
@@ -90,7 +90,7 @@ func HandleGrpcErrWithMessage(c *gin.Context, l logger.Logger, err error, messag
 func HandleInternalWithMessage(c *gin.Context, l logger.Logger, err error, message string) bool {
 	if err != nil {
 		c.JSON(http.StatusInternalServerError, models.Response{
-			Code:    config.ErrorCodeInternal,
+			Status:  config.ErrorCodeInternal,
 			Message: "Internal Server Error",
 		})
 		l.Error(message, logger.Error(err))
@@ -103,7 +103,7 @@ func HandleInternalWithMessage(c *gin.Context, l logger.Logger, err error, messa
 func HandleBadRequestErrWithMessage(c *gin.Context, l logger.Logger, err error, message string) bool {
 	if err != nil {
 		c.JSON(http.StatusBadRequest, models.Response{
-			Code:    config.ErrorCodeInvalidJSON,
+			Status:  config.ErrorCodeInvalidJSON,
 			Message: "Invalid Json",
 		})
 		l.Error(message, logger.Error(err))
@@ -114,7 +114,7 @@ func HandleBadRequestErrWithMessage(c *gin.Context, l logger.Logger, err error, 
 
 func HandleUserStatusErrWithMessage(c *gin.Context, l logger.Logger, message string) bool {
 	c.JSON(http.StatusBadRequest, models.Response{
-		Code:    config.ErrorCodeInvalidJSON,
+		Status:  config.ErrorCodeInvalidJSON,
 		Message: "in_verify",
 	})
 	return true

@@ -1,7 +1,7 @@
 package models
 
 import (
-	"gitlab.udevs.io/eld/eld_go_api_gateway/genproto/company_service"
+	"github.com/golanguzb71/livesphere-api-gateway/genproto/company_service"
 )
 
 type LoginRequest struct {

@@ -2,10 +2,10 @@ package main
 
 import (
 	rediscache "github.com/golanguzb70/redis-cache"
-	"gitlab.udevs.io/eld/eld_go_api_gateway/api"
-	"gitlab.udevs.io/eld/eld_go_api_gateway/config"
-	"gitlab.udevs.io/eld/eld_go_api_gateway/pkg/logger"
-	"gitlab.udevs.io/eld/eld_go_api_gateway/services"
+	"github.com/golanguzb71/livesphere-api-gateway/api"
+	"github.com/golanguzb71/livesphere-api-gateway/config"
+	"github.com/golanguzb71/livesphere-api-gateway/pkg/logger"
+	"github.com/golanguzb71/livesphere-api-gateway/services"
 )
 
 func main() {
