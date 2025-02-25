@@ -8,44 +8,51 @@ import (
 	"github.com/spf13/cast"
 )
 
+// Config ...
 type Config struct {
-	Environment            string // develop, staging, production
-	RPCPort                string
-	HTTPPort               string
-	PostgresHost           string
-	PostgresPort           int
-	PostgresDatabase       string
-	PostgresUser           string
-	PostgresPassword       string
-	CdnImagesBucketBaseURL string
+	Environment string // develop, staging, production
+
+	AuthServiceHost string
+	AuthServicePort string
+
+	CoreServiceHost string
+	CoreServicePort string
+
+	FinanceServiceHost string
+	FinanceServicePort string
+
+	LogLevel string
+	HttpPort string
+
+	JWTSigningKey string
+
+	RedisHost string
+	RedisPort string
 }
 
-func Load() *Config {
-	c := &Config{}
-	path, ok := os.LookupEnv("ENV_FILE_PATH")
-	if ok && path != "" {
-		if err := godotenv.Load(path); err != nil {
-			log.Print("No .env file found")
-		}
+func Load() Config {
+	if err := godotenv.Load("/app/.env"); err != nil {
+		log.Print("No .env file found")
 	}
 
-	c.Environment = cast.ToString(getOrReturnDefault("ENVIRONMENT", "develop"))
-	c.RPCPort = cast.ToString(getOrReturnDefault("RPC_PORT", "8080"))
-	c.HTTPPort = cast.ToString(getOrReturnDefault("HTTP_PORT", "8000"))
-
-	c.PostgresHost = cast.ToString(getOrReturnDefault("POSTGRES_HOST", "localhost"))
-	c.PostgresPort = cast.ToInt(getOrReturnDefault("POSTGRES_PORT", 5432))
-	c.PostgresDatabase = cast.ToString(getOrReturnDefault("POSTGRES_DATABASE", "dbname"))
-	c.PostgresUser = cast.ToString(getOrReturnDefault("POSTGRES_USER", "postgres"))
-	c.PostgresPassword = cast.ToString(getOrReturnDefault("POSTGRES_PASSWORD", "password"))
-	c.CdnImagesBucketBaseURL = cast.ToString(getOrReturnDefault("IMAGES_BUCKET_BASE_URL", "base_url_images"))
-	return c
+	config := Config{}
+	config.Environment = cast.ToString(getOrReturnDefault("ENVIRONMENT", "staging"))
+	config.LogLevel = cast.ToString(getOrReturnDefault("LOG_LEVEL", "debug"))
+	config.HttpPort = cast.ToString(getOrReturnDefault("HTTP_PORT", "8000"))
+	config.AuthServiceHost = cast.ToString(getOrReturnDefault("AUTH_SERVICE_HOST", "localhost"))
+	config.AuthServicePort = cast.ToString(getOrReturnDefault("AUTH_SERVICE_PORT", 8080))
+	config.CoreServiceHost = cast.ToString(getOrReturnDefault("CORE_SERVICE_HOST", "localhost"))
+	config.CoreServicePort = cast.ToString(getOrReturnDefault("CORE_SERVICE_PORT", 8080))
+	config.FinanceServiceHost = cast.ToString(getOrReturnDefault("FINANCE_SERVICE_HOST", "localhost"))
+	config.FinanceServicePort = cast.ToString(getOrReturnDefault("FINANCE_SERVICE_PORT", 8080))
+	config.JWTSigningKey = cast.ToString(getOrReturnDefault("JWT_SIGNING_KEY", "secret"))
+	return config
 }
 
-func getOrReturnDefault(key string, defaultValue any) any {
-	v, exists := os.LookupEnv(key)
+func getOrReturnDefault(key string, defaultValue interface{}) interface{} {
+	_, exists := os.LookupEnv(key)
 	if exists {
-		return v
+		return os.Getenv(key)
 	}
 
 	return defaultValue

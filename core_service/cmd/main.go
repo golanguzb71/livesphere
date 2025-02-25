@@ -22,7 +22,7 @@ func main() {
 		log.Error("Error while initializing http server", logger.Error(err))
 		return
 	}
-
+	
 	go func() {
 		err := httpServer.Run(log, cfg)
 		if err != nil {

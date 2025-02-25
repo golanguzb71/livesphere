@@ -1,34 +1,33 @@
 package main
 
 import (
-	"github.com/golanguzb71/livesphere-api-gateway/config"
-	"github.com/golanguzb71/livesphere-api-gateway/pkg/logger"
-	"github.com/golanguzb71/livesphere-api-gateway/server/grpc"
-	httpserver "github.com/golanguzb71/livesphere-api-gateway/server/http"
+	rediscache "github.com/golanguzb70/redis-cache"
+	"gitlab.udevs.io/eld/eld_go_api_gateway/api"
+	"gitlab.udevs.io/eld/eld_go_api_gateway/config"
+	"gitlab.udevs.io/eld/eld_go_api_gateway/pkg/logger"
+	"gitlab.udevs.io/eld/eld_go_api_gateway/services"
 )
 
 func main() {
 	cfg := config.Load()
-	log := logger.New(cfg.Environment, "name space for monitoring service log")
-
-	grpcServices, err := grpc.New(cfg, log)
+	log := logger.New(cfg.LogLevel, "livesphere_go_api_gateway")
+	gprcClients, err := services.NewGrpcClients(&cfg)
 	if err != nil {
-		log.Error("Error while initializing grpcServices", logger.Error(err))
+		log.Error("Error while getting grpc clients", logger.Error(err))
 		return
 	}
 
-	httpServer, err := httpserver.New(cfg, log, grpcServices)
-	if err != nil {
-		log.Error("Error while initializing http server", logger.Error(err))
-		return
-	}
+	cache := rediscache.New(&rediscache.Config{
+		RedisHost: cfg.RedisHost,
+		RedisPort: cfg.RedisPort,
+	})
 
-	go func() {
-		err := httpServer.Run(log, cfg)
-		if err != nil {
-			log.Fatal("Error while running http server", logger.Error(err))
-		}
-	}()
+	server := api.New(&api.RouterOptions{
+		Log:      log,
+		Cfg:      &cfg,
+		Services: gprcClients,
+		Cache:    cache,
+	})
 
-	grpcServices.Run(log, cfg)
+	server.Run(":" + cfg.HttpPort)
 }
