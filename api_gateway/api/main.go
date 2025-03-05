@@ -59,6 +59,28 @@ func New(opt *RouterOptions) *gin.Engine {
 		lead.GET("/get-all", handlerV1.GetAllLead)
 		lead.GET("/get-lead-reports", handlerV1.GetLeadReports)
 	}
+	expectation := v1Group.Group("/expectation")
+	{
+		expectation.POST("/create", handlerV1.CreateExpectation)
+		expectation.PUT("/update/:id", handlerV1.UpdateExpectation)
+		expectation.DELETE("/delete/:id", handlerV1.DeleteExpectation)
+	}
+	set := v1Group.Group("/set")
+	{
+		set.POST("/create", handlerV1.CreateSet)
+		set.PUT("/update", handlerV1.UpdateSet)
+		set.DELETE("/delete/:id", handlerV1.DeleteSet)
+		set.PATCH("/change-to-group", handlerV1.ChangeToSet)
+		set.GET("/get-by-id/:id", handlerV1.GetByIdSet)
+	}
+	leadData := v1Group.Group("leadData")
+	{
+		leadData.POST("/create", handlerV1.CreateLeadData)
+		leadData.PUT("/update", handlerV1.UpdateLeadData)
+		leadData.DELETE("/delete/:id", handlerV1.DeleteLeadData)
+		leadData.PATCH("/change-lead-data", handlerV1.ChangeLeadData)
+	}
+
 	url := ginSwagger.URL("swagger/doc.json")
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
 

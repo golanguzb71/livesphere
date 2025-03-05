@@ -1,0 +1,42 @@
+syntax = "proto3";
+
+package auth_service;
+option go_package = "genproto/core_service";
+
+import "core_models.proto";
+import "core_health.proto";
+
+service HealthCheckService {
+  rpc HealthCheck(Empty) returns (HealthCheckResponse) {}
+}
+
+service LeadService{
+  rpc Create() returns();
+  rpc GetList() returns();
+  rpc Update() returns ();
+  rpc Delete() returns();
+  rpc GetListSection() returns();
+  rpc GetLeadReports() returns();
+  rpc GetActiveLeadCount() returns();
+}
+
+service ExpectService{
+  rpc Create() returns();
+  rpc Update() returns();
+  rpc Delete() returns();
+}
+
+service SetService{
+  rpc Create() returns();
+  rpc Update() returns();
+  rpc Delete() returns();
+  rpc ChangeToGroup() returns();
+  rpc GetById() returns();
+}
+
+service LeadDataService{
+rpc Create() returns();
+rpc Update() returns();
+rpc Delete() returns();
+rpc ChangeLeadPlace() returns();
+}
