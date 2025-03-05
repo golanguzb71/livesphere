@@ -11,7 +11,7 @@ proto-gen:
 	bash scripts/gen-proto.sh ${CURRENT_DIR} && bash scripts/remove_omitempty_tag.sh
 
 copy-protos:
-	rm -rf protos/* && cp -R eld_protos/* protos
+	rm -rf protos/* && cp -R livesphere-protos/* protos
 
 pull-proto-module:
 	git submodule update --init --recursive
@@ -42,9 +42,3 @@ linter:
 
 swag_init:
 	swag init -g api/main.go -o api/docs
-
-stop: 
-	docker-compose down
-
-start: stop
-	docker-compose up -d --build
