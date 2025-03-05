@@ -6,7 +6,6 @@ import (
 	v1 "github.com/golanguzb71/livesphere-api-gateway/api/handlers/v1"
 	"github.com/golanguzb71/livesphere-api-gateway/api/middleware"
 	"github.com/golanguzb71/livesphere-api-gateway/config"
-	"github.com/golanguzb71/livesphere-api-gateway/event"
 	"github.com/golanguzb71/livesphere-api-gateway/pkg/logger"
 	"github.com/golanguzb71/livesphere-api-gateway/services"
 
@@ -51,7 +50,15 @@ func New(opt *RouterOptions) *gin.Engine {
 
 	v1Group := router.Group("/v1")
 	v1Group.Use(middleware.Authentication(options, opt.Cfg))
-
+	lead := v1Group.Group("/lead")
+	{
+		lead.POST("/create", handlerV1.CreateLead)
+		lead.POST("/get-lead-common", handlerV1.GetLeadCommon)
+		lead.PUT("/update/:id", handlerV1.UpdateLead)
+		lead.DELETE("/delete/:id", handlerV1.DeleteLead)
+		lead.GET("/get-all", handlerV1.GetAllLead)
+		lead.GET("/get-lead-reports", handlerV1.GetLeadReports)
+	}
 	url := ginSwagger.URL("swagger/doc.json")
 	router.GET("/swagger/*any", ginSwagger.WrapHandler(swaggerFiles.Handler, url))
 

@@ -18,8 +18,8 @@ type Config struct {
 	CoreServiceHost string
 	CoreServicePort string
 
-	FinanceServiceHost string
-	FinanceServicePort string
+	PaymentServiceHost string
+	PaymentServicePort string
 
 	LogLevel string
 	HttpPort string
@@ -43,8 +43,8 @@ func Load() Config {
 	config.AuthServicePort = cast.ToString(getOrReturnDefault("AUTH_SERVICE_PORT", 8080))
 	config.CoreServiceHost = cast.ToString(getOrReturnDefault("CORE_SERVICE_HOST", "localhost"))
 	config.CoreServicePort = cast.ToString(getOrReturnDefault("CORE_SERVICE_PORT", 8080))
-	config.FinanceServiceHost = cast.ToString(getOrReturnDefault("FINANCE_SERVICE_HOST", "localhost"))
-	config.FinanceServicePort = cast.ToString(getOrReturnDefault("FINANCE_SERVICE_PORT", 8080))
+	config.PaymentServiceHost = cast.ToString(getOrReturnDefault("FINANCE_SERVICE_HOST", "localhost"))
+	config.PaymentServicePort = cast.ToString(getOrReturnDefault("FINANCE_SERVICE_PORT", 8080))
 	config.JWTSigningKey = cast.ToString(getOrReturnDefault("JWT_SIGNING_KEY", "secret"))
 	return config
 }
