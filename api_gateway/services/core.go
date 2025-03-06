@@ -1,8 +1,10 @@
 package services
 
 import (
+	"context"
 	"fmt"
 	"github.com/golanguzb71/livesphere-api-gateway/config"
+	coreService "github.com/golanguzb71/livesphere-api-gateway/genproto/core_service"
 	grpcpool "github.com/processout/grpc-go-pool"
 	"google.golang.org/grpc"
 	"google.golang.org/grpc/credentials/insecure"
@@ -10,6 +12,10 @@ import (
 )
 
 type CoreServiceI interface {
+	LeadService(ctx context.Context) coreService.LeadServiceClient
+	ExpectService(ctx context.Context) coreService.ExpectServiceClient
+	SetService(ctx context.Context) coreService.SetServiceClient
+	LeadDataService(ctx context.Context) coreService.LeadDataServiceClient
 }
 type CoreService struct {
 	pool *grpcpool.Pool
@@ -43,4 +49,20 @@ func NewCoreService(cfg *config.Config) (CoreServiceI, error) {
 		pool: pool,
 		conn: conn,
 	}, nil
+}
+
+func (c *CoreService) LeadService(ctx context.Context) coreService.LeadServiceClient {
+	return coreService.NewLeadServiceClient(c.conn)
+}
+
+func (c *CoreService) ExpectService(ctx context.Context) coreService.ExpectServiceClient {
+	return coreService.NewExpectServiceClient(c.conn)
+}
+
+func (c *CoreService) SetService(ctx context.Context) coreService.SetServiceClient {
+	return coreService.NewSetServiceClient(c.conn)
+}
+
+func (c *CoreService) LeadDataService(ctx context.Context) coreService.LeadDataServiceClient {
+	return coreService.NewLeadDataServiceClient(c.conn)
 }

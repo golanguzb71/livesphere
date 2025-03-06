@@ -1,8 +1,37 @@
 syntax = "proto3";
 
-package auth_service;
+package core_service;
 option go_package = "genproto/core_service";
 
 message Empty{
+}
 
+message Id {
+  string id = 1;
+  string slug = 2;
+  map<string, string> extra = 5;
+}
+message GetListFilter{
+  int32 page = 1;
+  int32 limit = 2;
+  //  bool is_deleted = 3;
+  repeated Filters filters = 3;
+  repeated SortBy sorts = 4;
+  map<string, string> extra = 5;
+}
+
+message Filters {
+  string field = 1;
+  string type = 2;
+  string value = 3;
+}
+
+message SortBy {
+  string field = 1;
+  string type = 2;
+}
+
+message Object {
+  string label = 1;
+  string value = 2;
 }

@@ -1,42 +1,43 @@
 syntax = "proto3";
 
-package auth_service;
+package core_service;
 option go_package = "genproto/core_service";
 
 import "core_models.proto";
 import "core_health.proto";
+import "lead.proto";
 
 service HealthCheckService {
   rpc HealthCheck(Empty) returns (HealthCheckResponse) {}
 }
 
 service LeadService{
-  rpc Create() returns();
-  rpc GetList() returns();
-  rpc Update() returns ();
-  rpc Delete() returns();
-  rpc GetListSection() returns();
-  rpc GetLeadReports() returns();
-  rpc GetActiveLeadCount() returns();
+  rpc Create(Lead) returns(Lead);
+  rpc GetList(GetListFilter) returns(GetLeadListResponse);
+  rpc Update(Lead) returns (Lead);
+  rpc Delete(Id) returns(Empty);
+  rpc GetListSection(Empty) returns(GetListSectionResponse);
+  rpc GetLeadReports(GetListFilter) returns(GetLeadReportsResponse);
+  rpc GetActiveLeadCount(Empty) returns(GetActiveLeadCountResponse);
 }
 
 service ExpectService{
-  rpc Create() returns();
-  rpc Update() returns();
-  rpc Delete() returns();
+  rpc Create(Expect) returns(Expect);
+  rpc Update(Expect) returns(Expect);
+  rpc Delete(Id) returns(Empty);
 }
 
 service SetService{
-  rpc Create() returns();
-  rpc Update() returns();
-  rpc Delete() returns();
-  rpc ChangeToGroup() returns();
-  rpc GetById() returns();
+  rpc Create(Set) returns(Set);
+  rpc Update(Set) returns(Set);
+  rpc Delete(Id) returns(Empty);
+  rpc ChangeToGroup(ChangeToGroupRequest) returns(Empty);
+  rpc GetById(Id) returns(SetDataResponse);
 }
 
 service LeadDataService{
-rpc Create() returns();
-rpc Update() returns();
-rpc Delete() returns();
-rpc ChangeLeadPlace() returns();
+  rpc Create(LeadData) returns(LeadData);
+  rpc Update(LeadData) returns(LeadData);
+  rpc Delete(Id) returns(Empty);
+  rpc ChangeLeadPlace(ChangeLeadPlaceRequest) returns(Empty);
 }

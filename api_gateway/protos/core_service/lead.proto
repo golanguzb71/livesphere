@@ -1,0 +1,110 @@
+syntax = "proto3";
+
+package core_service;
+option go_package = "genproto/core_service";
+// Lead
+message Lead {
+  string id = 1;
+  string title = 2;
+}
+message GetLeadListResponse{
+  repeated Section leads = 1;
+  repeated Section expectations = 2;
+  repeated Section sets = 3;
+}
+message Section{
+  string id = 5;
+  string name = 1;
+  int32 leadsCount = 2;
+  repeated LeadUser leads = 3;
+  string type = 4;
+}
+message LeadUser {
+  string id = 1;
+  string name = 5;
+  string comment = 2;
+  string createdAt = 3;
+  string phoneNumber = 4;
+}
+message GetListSectionResponse{
+  repeated DynamicSection sections = 1;
+}
+message DynamicSection{
+  string id = 1;
+  string name = 2;
+}
+message GetLeadReportsResponse{
+  repeated LeadConversion leadConversion = 1;
+  repeated LeadConversionForSource leadConversionForSource = 2;
+}
+message LeadConversion{
+  string conversionDate = 1;
+  int32 lead_count = 2;
+}
+message LeadConversionForSource{
+  string source = 1;
+  int32 leads_count = 2;
+}
+message GetActiveLeadCountResponse{
+  int32 activeLeadCount = 1;
+}
+
+// Expect
+message Expect{
+  string id = 1;
+  string title = 2;
+}
+
+// Set
+message Set{
+  string id = 1;
+  string title = 2;
+  string courseId = 3;
+  string teacherId = 4;
+  string dateType = 5;
+  repeated string date = 6;
+  string lessonStartTime = 7;
+}
+
+message ChangeToGroupRequest{
+  string name = 1;
+  string roomId = 2;
+  string courseId = 3;
+  string teacherId = 4;
+  string dateType = 5;
+  repeated string days = 6;
+  string startTime = 7;
+  string startDate = 8;
+  string end_date = 9;
+  string setId = 10;
+}
+
+message SetDataResponse{
+  string title = 1;
+  string teacherId = 2;
+  string teacherName = 3;
+  string courseId = 4;
+  string courseName = 5;
+  string dateType = 6;
+  repeated string dates = 7;
+  string lessonStartTime = 8;
+}
+
+// Lead Data
+message LeadData{
+  string id = 1;
+  string type = 2;
+  string sectionId = 3;
+  string name = 4;
+  string phoneNumber = 5;
+  string comment = 6;
+}
+
+message ChangeLeadPlaceRequest{
+  string leadDataId = 1;
+  ChangeLeadDataRequest changedSet = 2;
+}
+message ChangeLeadDataRequest{
+  string id = 1;
+  string sectionType = 2;
+}
